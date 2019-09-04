@@ -1,0 +1,18 @@
+<div class="ui action input">
+  <Input @value={{this.concept}} @enter={{action "refreshModel"}} placeholder="Concept..." />
+  <div class="ui button" {{action "refreshModel"}}>Specify</div>
+</div>
+
+{{#if model}}
+<div class="ui divider"></div>
+  <a class="ui top attached button" href={{model.downloadUrl}} download="{{concept}}.casl">Save CASL</a>
+  <div class="ui attached segment">
+    <p>{{{model.htmlSpec}}}</p>
+  </div>
+{{/if}}
+
+{{#if currentlyLoading}}
+  <div class="ui active inverted dimmer">
+    <div class="ui text loader">Extract and specify mental space...</div>
+  </div>
+{{/if}}

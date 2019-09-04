@@ -1,9 +1,12 @@
 <div class="ui menu">
-  {{#link-to "thesis" class="item"}}
+  <LinkTo @route="specifier" class="item">
+    Specifier
+  </LinkTo>
+  <LinkTo @route="thesis" class="item">
     Thesis
-  {{/link-to}}
+  </LinkTo>
 </div>
 
 <div class="ui justified text container">
-{{outlet}}
+  {{outlet}}
 </div>
