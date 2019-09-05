@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('thesis');
   this.route('concept-specifier');
+  this.route('input-specifier');
 });
 
 export default Router;

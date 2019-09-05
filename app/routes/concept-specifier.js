@@ -4,6 +4,8 @@ import { hash } from 'rsvp';
 
 export default Route.extend({
 
+  specifyEndpoint: 'http://' + ENV.APP.innovatorHost + '/specify/',
+
   actions: {
     loading(transition, originRoute) {
       let controller = this.controllerFor(this.routeName);
@@ -14,28 +16,37 @@ export default Route.extend({
     }
   },
 
-  model({ concept }) {
-    if (!concept) {
+  model(params) {
+
+    if (!this.validateParams(params)) {
       return null;
     }
 
-    const specifyEndpoint = 'http://' + ENV.APP.innovatorHost + '/specify/' + concept;
-    const specRequest = fetch(specifyEndpoint).then(resp => resp.blob());
-    const downloadUrl = specRequest.then(specBlob => window.URL.createObjectURL(specBlob));
-
-    const spec = specRequest.then(specBlob => {
-      return new Promise(resolve => {
+    return new Promise(resolve => {
+      const request = this.getRequest(params);
+      const blobPromise = request.then(resp => resp.blob());
+      blobPromise.then(blob => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.readAsText(specBlob);
+        reader.onload = () => {
+          let spec = reader.result;
+          spec = spec.replace(/\n/g, '<br>');
+          spec = spec.replace(/ /g, '&nbsp;');
+          resolve({
+            downloadUrl: window.URL.createObjectURL(blob),
+            htmlSpec: spec
+          });
+        };
+        reader.readAsText(blob);
       })
     });
+  },
 
-    const htmlSpec = spec.then(spec => spec.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;'))
+  validateParams({ concept }){
+    return concept;
+  },
 
-    return hash({
-      downloadUrl,
-      htmlSpec
-    });
+  getRequest({ concept }){
+    const specifyEndpoint = this.specifyEndpoint + concept;
+    return fetch(specifyEndpoint);
   }
 });

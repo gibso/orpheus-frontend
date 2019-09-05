@@ -1,0 +1,30 @@
+
+
+
+<div class="ui segment">
+<form class="ui form" {{action "refreshModel" on="submit"}}>
+  <div class="field">
+    <label>Input Concept 1</label>
+    <Input @value={{this.concept1}} @enter={{action "refreshModel"}} placeholder="Input Concept 1..." />
+  </div>
+  <div class="field">
+    <label>Input Concept 2</label>
+    <Input @value={{this.concept2}} @enter={{action "refreshModel"}} placeholder="Input Concept 2..." />
+  </div>
+  <button class="ui button" type="submit">Specify</button>
+</form>
+</div>
+
+{{#if model}}
+  <div class="ui divider"></div>
+  <a class="ui top attached button" href={{model.downloadUrl}} download="{{concept}}.casl">Save CASL</a>
+  <div class="ui attached segment">
+    <p>{{{model.htmlSpec}}}</p>
+  </div>
+{{/if}}
+
+{{#if currentlyLoading}}
+  <div class="ui active inverted dimmer">
+    <div class="ui text loader">Extract and specify mental spaces...</div>
+  </div>
+{{/if}}

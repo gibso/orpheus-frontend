@@ -1,12 +1,15 @@
 <div class="ui menu">
-  <LinkTo @route="concept-specifier" class="item">
-    Specifier
+  <LinkTo @route="concept-specifier" @query={{hash concept=null}} class="item">
+    Concept-Specifier
+  </LinkTo>
+  <LinkTo @route="input-specifier" @query={{hash concept1=null concept2=null}} class="item">
+    Input-Specifier
   </LinkTo>
   <LinkTo @route="thesis" class="item">
     Thesis
   </LinkTo>
 </div>
 
-<div class="ui justified text container">
+<div class="ui container">
   {{outlet}}
 </div>
