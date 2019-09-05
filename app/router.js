@@ -8,7 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('thesis');
-  this.route('specifier');
+  this.route('concept-specifier');
 });
 
 export default Router;

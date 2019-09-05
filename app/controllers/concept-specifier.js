@@ -9,7 +9,7 @@ export default Controller.extend({
 
   actions: {
     refreshModel(){
-      getOwner(this).lookup('route:specifier').refresh();
+      getOwner(this).lookup('route:concept-specifier').refresh();
     }
   }
 });
