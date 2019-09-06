@@ -8,7 +8,7 @@
       <label>Input Concept 2</label>
       <Input @value={{this.concept2}} @enter={{action "refreshModel"}} placeholder="Input Concept 2..."/>
     </div>
-    <button class="ui button {{unless this.paramsAreValid 'disabled'}}" type="submit">Specify</button>
+    <button class="ui button {{unless this.paramsAreValid "disabled"}}" type="submit">Specify</button>
   </form>
 </div>
 
@@ -16,7 +16,7 @@
   <div class="ui divider"></div>
   <a class="ui top attached button" href={{this.model.downloadUrl}} download="{{this.concept1}}-{{this.concept2}}.casl">Save CASL</a>
   <div class="ui attached segment">
-    <p>{{{this.model.htmlSpec}}}</p>
+    <p>{{this.spec}}</p>
   </div>
 {{/if}}
 

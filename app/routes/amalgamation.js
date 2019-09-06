@@ -1,21 +1,14 @@
 import Route from '@ember/routing/route';
 import ENV from '../config/environment';
+import LoadableMixin from './mixins/loadable';
 
-export default Route.extend({
+export default Route.extend(LoadableMixin, {
 
   amalgamationEndpoint: 'http://' + ENV.APP.amalgamationHost + '/amalgamation',
 
-  actions: {
-    loading(transition, originRoute) {
-      let controller = this.controllerFor(this.routeName);
-      controller.set('currentlyLoading', true);
-      transition.promise.finally(function () {
-        controller.set('currentlyLoading', false);
-      });
-    },
-  },
 
-  model(params) {
+
+  model() {
     if (!this.controller) {
       return null;
     }
@@ -41,20 +34,7 @@ export default Route.extend({
           this.controller.set('isError', true);
           return response.text();
         }
-        return response.json().then(this.formatJson);
+        return response.json();
       })
-  },
-
-  formatJson(json) {
-    ['genericSpace', 'blend', 'input1', 'input2'].forEach(specKey => {
-      json[specKey] = encodeHtml(json[specKey]);
-    });
-    return json;
-
-    function encodeHtml(spec) {
-      return spec.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-    }
-  },
-
-
+  }
 });

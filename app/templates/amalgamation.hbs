@@ -9,7 +9,7 @@
           Open Input Specification File
         {{/if}}
       </label>
-      <input type="file" id="file" style="display:none" onchange={{action "receiveFiles" value="target.files"}}>
+      <input type="file" id="file" onchange={{action "receiveFiles" value="target.files"}} hidden>
     </div>
     <div class="field">
       <label>Input Space Name 1</label>
@@ -19,15 +19,14 @@
       <label>Input Space Name 1</label>
       <Input @value={{this.spaceName2}} placeholder="Input Space Name 2..."/>
     </div>
-    <button class="ui button {{if this.paramsAreInvalid 'disabled'}}" type="submit">Run Amalgamation</button>
+    <button class="ui button {{if this.paramsAreInvalid "disabled"}}" type="submit">Run Amalgamation</button>
   </form>
 </div>
 
 {{#if isError}}
   <div class="ui error message">
-    <i class="close icon" {{action "closeError"}}></i>
     <div class="ui header">An error occurred</div>
-      {{{model}}}
+    {{model}}
   </div>
 {{/if}}
 
@@ -38,18 +37,18 @@
   <div class="ui segment">
     <table class="ui celled table">
       <tbody>
-      <tr>
-        <td>Blend ID</td>
-        <td>{{model.blendId}}</td>
-      </tr>
-      <tr>
-        <td>Blend name</td>
-        <td>{{model.blendName}}</td>
-      </tr>
-      <tr>
-        <td>Cost</td>
-        <td>{{model.cost}}</td>
-      </tr>
+        <tr>
+          <td>Blend ID</td>
+          <td>{{model.blendId}}</td>
+        </tr>
+        <tr>
+          <td>Blend name</td>
+          <td>{{model.blendName}}</td>
+        </tr>
+        <tr>
+          <td>Cost</td>
+          <td>{{model.cost}}</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -64,16 +63,16 @@
       <div class="item" data-tab="input2">input space 2</div>
     </div>
     <div class="ui tab" data-tab="generic">
-      <p>{{{model.genericSpace}}}</p>
+      <p>{{specs.genericSpace}}</p>
     </div>
     <div class="ui tab active" data-tab="blend">
-      <p>{{{model.blend}}}</p>
+      <p>{{specs.blend}}</p>
     </div>
     <div class="ui tab" data-tab="input1">
-      <p>{{{model.input1}}}</p>
+      <p>{{specs.input1}}</p>
     </div>
     <div class="ui tab" data-tab="input2">
-      <p>{{{model.input2}}}</p>
+      <p>{{specs.input2}}</p>
     </div>
   </UiTabs>
 
