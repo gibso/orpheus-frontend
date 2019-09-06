@@ -38,12 +38,34 @@ export default Controller.extend({
 
     refreshModel(){
       getOwner(this).lookup(`route:${this.target.currentRoute.name}`).refresh();
-    }
+    },
+
+    loadDemo(demo){
+      switch(demo) {
+        case 'tritone':
+          return this.loadTritoneDemo();
+      }
+    },
   },
 
   resetParams(){
     this.set('specFile', null);
     this.set('spaceName1', null);
     this.set('spaceName2', null);
+  },
+
+  loadTritoneDemo() {
+    this.set('spaceName1', 'G7');
+    this.set('spaceName2', 'Bbmin');
+    this.loadDemoFile('tritone_demo.casl');
+  },
+
+  loadDemoFile(filename) {
+    fetch('examples/' + filename)
+      .then(response => response.blob())
+      .then(blob => {
+        blob.name = filename;
+        this.set('specFile', blob);
+      })
   }
 });

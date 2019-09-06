@@ -1,23 +1,39 @@
 <div class="ui segment">
   <form class="ui form" {{action "refreshModel" on="submit"}}>
-    <div class="field">
-      <label for="file" class="ui icon button">
-        <i class="file icon"></i>
-        {{#if this.specFile}}
-          {{this.specFile.name}} - {{this.specFile.size}} Bytes
-        {{else}}
-          Open Input Specification File
-        {{/if}}
-      </label>
-      <input type="file" id="file" onchange={{action "receiveFiles" value="target.files"}} hidden>
+    <div class="two fields">
+      <div class="field">
+        <label>Load Demo Input Specification</label>
+        <UiDropdown class="selection"  @onChange={{action "loadDemo"}}>
+          <input type="hidden" name="gender">
+          <i class="dropdown icon"></i>
+          <div class="default text">Demo</div>
+          <div class="menu">
+            <div class="item" data-value="tritone">COINVENT tritone example</div>
+          </div>
+        </UiDropdown>
+      </div>
+      <div class="field">
+        <label>Input Specification File</label>
+        <label for="file" class="ui icon button">
+          <i class="file icon"></i>
+          {{#if this.specFile}}
+            {{this.specFile.name}} - {{this.specFile.size}} Bytes
+          {{else}}
+            Open Input Specification File
+          {{/if}}
+        </label>
+        <input type="file" id="file" onchange={{action "receiveFiles" value="target.files"}} hidden>
+      </div>
     </div>
-    <div class="field">
-      <label>Input Space Name 1</label>
-      <Input @value={{this.spaceName1}} placeholder="Input Space Name 1..."/>
-    </div>
-    <div class="field">
-      <label>Input Space Name 1</label>
-      <Input @value={{this.spaceName2}} placeholder="Input Space Name 2..."/>
+    <div class="two fields">
+      <div class="field">
+        <label>Input Space Name 1</label>
+        <Input @value={{this.spaceName1}} placeholder="Input Space Name 1..."/>
+      </div>
+      <div class="field">
+        <label>Input Space Name 2</label>
+        <Input @value={{this.spaceName2}} placeholder="Input Space Name 2..."/>
+      </div>
     </div>
     <button class="ui button {{if this.paramsAreInvalid "disabled"}}" type="submit">Run Amalgamation</button>
   </form>
