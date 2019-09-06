@@ -1,0 +1,86 @@
+<div class="ui segment">
+  <form class="ui form" {{action "refreshModel" on="submit"}}>
+    <div class="field">
+      <label for="file" class="ui icon button">
+        <i class="file icon"></i>
+        {{#if this.specFile}}
+          {{this.specFile.name}} - {{this.specFile.size}} Bytes
+        {{else}}
+          Open Input Specification File
+        {{/if}}
+      </label>
+      <input type="file" id="file" style="display:none" onchange={{action "receiveFiles" value="target.files"}}>
+    </div>
+    <div class="field">
+      <label>Input Space Name 1</label>
+      <Input @value={{this.spaceName1}} placeholder="Input Space Name 1..."/>
+    </div>
+    <div class="field">
+      <label>Input Space Name 1</label>
+      <Input @value={{this.spaceName2}} placeholder="Input Space Name 2..."/>
+    </div>
+    <button class="ui button {{if this.paramsAreInvalid 'disabled'}}" type="submit">Run Amalgamation</button>
+  </form>
+</div>
+
+{{#if isError}}
+  <div class="ui error message">
+    <i class="close icon" {{action "closeError"}}></i>
+    <div class="ui header">An error occurred</div>
+      {{{model}}}
+  </div>
+{{/if}}
+
+{{#if isSuccess}}
+
+  <div class="ui divider"></div>
+
+  <div class="ui segment">
+    <table class="ui celled table">
+      <tbody>
+      <tr>
+        <td>Blend ID</td>
+        <td>{{model.blendId}}</td>
+      </tr>
+      <tr>
+        <td>Blend name</td>
+        <td>{{model.blendName}}</td>
+      </tr>
+      <tr>
+        <td>Cost</td>
+        <td>{{model.cost}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <UiTabs class="ui segment">
+    <div class="ui top attached tabular menu">
+      <div class="item" data-tab="generic">generic space</div>
+      <div class="item active" data-tab="blend">blend</div>
+      <div class="item" data-tab="input1">input space 1</div>
+      <div class="item" data-tab="input2">input space 2</div>
+    </div>
+    <div class="ui tab" data-tab="generic">
+      <p>{{{model.genericSpace}}}</p>
+    </div>
+    <div class="ui tab active" data-tab="blend">
+      <p>{{{model.blend}}}</p>
+    </div>
+    <div class="ui tab" data-tab="input1">
+      <p>{{{model.input1}}}</p>
+    </div>
+    <div class="ui tab" data-tab="input2">
+      <p>{{{model.input2}}}</p>
+    </div>
+  </UiTabs>
+
+{{/if}}
+
+{{#if currentlyLoading}}
+  <div class="ui active inverted dimmer">
+    <div class="ui text loader">Generalize and blend input spaces...</div>
+  </div>
+{{/if}}

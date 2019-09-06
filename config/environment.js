@@ -20,7 +20,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      innovatorHost: process.env.INNOVATOR_HOST
+      innovatorHost: process.env.INNOVATOR_HOST,
+      amalgamationHost: process.env.AMALGAMATION_HOST
     }
   };
 

@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('thesis');
   this.route('concept-specifier');
   this.route('input-specifier');
+  this.route('amalgamation');
 });
 
 export default Router;
