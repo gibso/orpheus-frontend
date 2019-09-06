@@ -1,10 +1,15 @@
 import Route from '@ember/routing/route';
 import ENV from '../config/environment';
-import { hash } from 'rsvp';
+import { computed } from '@ember/object';
 
 export default Route.extend({
 
   specifyEndpoint: 'http://' + ENV.APP.innovatorHost + '/specify/',
+
+  request: computed(function(){
+    const specifyEndpoint = this.specifyEndpoint + this.controller.concept;
+    return fetch(specifyEndpoint);
+  }),
 
   actions: {
     loading(transition, originRoute) {
@@ -17,14 +22,12 @@ export default Route.extend({
   },
 
   model(params) {
-
-    if (!this.validateParams(params)) {
+    if (!this.controller) {
       return null;
     }
 
     return new Promise(resolve => {
-      const request = this.getRequest(params);
-      const blobPromise = request.then(resp => resp.blob());
+      const blobPromise = this.request.then(resp => resp.blob());
       blobPromise.then(blob => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -39,14 +42,5 @@ export default Route.extend({
         reader.readAsText(blob);
       })
     });
-  },
-
-  validateParams({ concept }){
-    return concept;
-  },
-
-  getRequest({ concept }){
-    const specifyEndpoint = this.specifyEndpoint + concept;
-    return fetch(specifyEndpoint);
   }
 });

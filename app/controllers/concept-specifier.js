@@ -4,8 +4,11 @@ import { getOwner } from '@ember/application';
 
 export default Controller.extend({
 
-  queryParams: ['concept'],
   concept: null,
+
+  paramsAreValid: computed('concept', function(){
+    return !!this.concept;
+  }),
 
   actions: {
     refreshModel(){
