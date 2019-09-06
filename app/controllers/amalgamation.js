@@ -43,7 +43,9 @@ export default Controller.extend({
     loadDemo(demo){
       switch(demo) {
         case 'tritone':
-          return this.loadTritoneDemo();
+          return this.loadDemo('tritone_demo.casl', 'G7', 'Bbmin');
+        case 'houseBoatMinimal':
+          return this.loadDemo('house_boat_minimal.casl', 'House', 'Boat');
       }
     },
   },
@@ -54,10 +56,10 @@ export default Controller.extend({
     this.set('spaceName2', null);
   },
 
-  loadTritoneDemo() {
-    this.set('spaceName1', 'G7');
-    this.set('spaceName2', 'Bbmin');
-    this.loadDemoFile('tritone_demo.casl');
+  loadDemo(filename, specName1, specName2){
+    this.loadDemoFile(filename);
+    this.set('spaceName1', specName1);
+    this.set('spaceName2', specName2);
   },
 
   loadDemoFile(filename) {
