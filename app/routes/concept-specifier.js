@@ -12,7 +12,7 @@ export default Route.extend(LoadableMixin, {
     return fetch(specifyEndpoint);
   }),
 
-  model(params) {
+  model() {
     if (!this.controller) {
       return null;
     }

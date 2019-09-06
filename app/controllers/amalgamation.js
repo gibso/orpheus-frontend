@@ -2,7 +2,6 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { not, and } from '@ember/object/computed';
 import { getOwner } from '@ember/application';
-import { htmlSafe } from '@ember/string';
 import { formatSpec2Html } from './utils/spec-formatter'
 
 export default Controller.extend({
