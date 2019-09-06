@@ -39,5 +39,11 @@ export default Controller.extend({
     refreshModel(){
       getOwner(this).lookup(`route:${this.target.currentRoute.name}`).refresh();
     }
+  },
+
+  resetParams(){
+    this.set('specFile', null);
+    this.set('spaceName1', null);
+    this.set('spaceName2', null);
   }
 });

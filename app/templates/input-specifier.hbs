@@ -20,6 +20,13 @@
   </div>
 {{/if}}
 
+{{#if this.error}}
+  <div class="ui error message">
+    <div class="ui header">An error occurred</div>
+    {{this.error}}
+  </div>
+{{/if}}
+
 {{#if this.currentlyLoading}}
   <div class="ui active inverted dimmer">
     <div class="ui text loader">Extract and specify mental spaces...</div>

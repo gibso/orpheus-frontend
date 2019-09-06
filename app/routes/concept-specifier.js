@@ -1,29 +1,39 @@
 import Route from '@ember/routing/route';
 import ENV from '../config/environment';
-import { computed } from '@ember/object';
 import LoadableMixin from './mixins/loadable';
-import { hash } from 'rsvp';
+import ResetableMixin from './mixins/resetable';
 
-export default Route.extend(LoadableMixin, {
+export default Route.extend(LoadableMixin, ResetableMixin, {
 
   specifyEndpoint: 'http://' + ENV.APP.specifierHost + '/specify/',
 
-  request: computed(function(){
-    const specifyEndpoint = this.specifyEndpoint + this.controller.concept;
-    return fetch(specifyEndpoint);
-  }),
+  request() {
+    const endpoint = this.specifyEndpoint + 'concept';
+    return fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({ 'concept-name': this.controller.concept }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+  },
 
   model() {
-    if (!this.controller) {
+    if (!this.controller || this.controller.paramsAreInvalid) {
       return null;
     }
 
-    return this.request.then(response => {
-      return hash({
-          spec: response.clone().text(),
-          blob: response.clone().blob()
-        }
+    this.controller.set('isError', false);
+
+    return this.request().then(response =>
+      response.clone().blob().then(blob =>
+        response.clone().text().then(spec => {
+          return {spec, blob}
+        })
       )
+    ).catch(error => {
+      this.controller.set('error', error);
+      throw error;
     });
   }
 });

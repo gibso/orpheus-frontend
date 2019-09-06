@@ -1,15 +1,14 @@
 import Route from '@ember/routing/route';
 import ENV from '../config/environment';
 import LoadableMixin from './mixins/loadable';
+import ResetableMixin from './mixins/resetable';
 
-export default Route.extend(LoadableMixin, {
+export default Route.extend(LoadableMixin, ResetableMixin, {
 
   amalgamationEndpoint: 'http://' + ENV.APP.amalgamationHost + '/amalgamation',
 
-
-
   model() {
-    if (!this.controller) {
+    if (!this.controller || this.controller.paramsAreInvalid) {
       return null;
     }
     this.controller.set('isError', null);

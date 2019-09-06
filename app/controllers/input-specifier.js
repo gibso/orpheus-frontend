@@ -9,4 +9,10 @@ export default ConceptSpecifierController.extend({
   paramsAreValid: computed('concept1', 'concept2', function () {
     return !!this.concept1 && !!this.concept2;
   }),
+
+  resetParams(){
+    this.set('concept1', null);
+    this.set('concept2', null);
+    this.set('error', null);
+  }
 });

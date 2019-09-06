@@ -23,14 +23,14 @@
   </form>
 </div>
 
-{{#if isError}}
+{{#if this.isError}}
   <div class="ui error message">
     <div class="ui header">An error occurred</div>
-    {{model}}
+    {{this.model}}
   </div>
 {{/if}}
 
-{{#if isSuccess}}
+{{#if this.isSuccess}}
 
   <div class="ui divider"></div>
 
@@ -78,7 +78,7 @@
 
 {{/if}}
 
-{{#if currentlyLoading}}
+{{#if this.currentlyLoading}}
   <div class="ui active inverted dimmer">
     <div class="ui text loader">Generalize and blend input spaces...</div>
   </div>

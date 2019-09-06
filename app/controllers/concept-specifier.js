@@ -2,10 +2,13 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { formatSpec2Html } from './utils/spec-formatter'
+import { not } from '@ember/object/computed';
 
 export default Controller.extend({
 
   concept: null,
+
+  paramsAreInvalid: not('paramsAreValid'),
 
   paramsAreValid: computed('concept', function () {
     return !!this.concept;
@@ -23,5 +26,10 @@ export default Controller.extend({
     refreshModel() {
       getOwner(this).lookup(`route:${this.target.currentRoute.name}`).refresh();
     }
+  },
+
+  resetParams(){
+    this.set('concept', null);
+    this.set('error', null);
   }
 });
