@@ -6,7 +6,7 @@ import { hash } from 'rsvp';
 
 export default Route.extend(LoadableMixin, {
 
-  specifyEndpoint: 'http://' + ENV.APP.innovatorHost + '/specify/',
+  specifyEndpoint: 'http://' + ENV.APP.specifierHost + '/specify/',
 
   request: computed(function(){
     const specifyEndpoint = this.specifyEndpoint + this.controller.concept;
