@@ -11,8 +11,12 @@ export default Controller.extend({
     return !!this.concept;
   }),
 
-  spec: computed('model', function () {
+  spec: computed('model.spec', function () {
     return formatSpec2Html(this.model.spec)
+  }),
+
+  downloadUrl: computed('model.blob', function(){
+    return window.URL.createObjectURL(this.model.blob);
   }),
 
   actions: {
