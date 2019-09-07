@@ -1,18 +1,21 @@
-<div class="ui menu">
-  <LinkTo @route="concept-specifier" class="item">
-    Concept-Specifier
-  </LinkTo>
-  <LinkTo @route="input-specifier" class="item">
-    Input-Specifier
-  </LinkTo>
-  <LinkTo @route="amalgamation" class="item">
-    Amalgamation
-  </LinkTo>
-  <LinkTo @route="thesis" class="item">
-    Thesis
-  </LinkTo>
+<div class="ui hidden divider"></div>
+<div class="ui container">
+  <div class="ui huge four item menu">
+    <LinkTo @route="thesis" class="item">
+      Thesis
+    </LinkTo>
+    <LinkTo @route="concept-specifier" class="item">
+      Concept-Specifier
+    </LinkTo>
+    <LinkTo @route="input-specifier" class="item">
+      Input-Specifier
+    </LinkTo>
+    <LinkTo @route="amalgamation" class="item">
+      Amalgamation
+    </LinkTo>
+  </div>
 </div>
 
-<div class="ui container">
-  {{outlet}}
-</div>
+<div class="ui hidden divider"></div>
+
+{{outlet}}

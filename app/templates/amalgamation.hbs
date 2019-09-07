@@ -1,15 +1,17 @@
-<div class="ui segment">
-  <form class="ui form" {{action "refreshModel" on="submit"}}>
+<div class="ui container padded segment">
+  <form class="ui huge form" {{action "refreshModel" on="submit"}}>
     <div class="two fields">
       <div class="field">
         <label>Load Demo Input Specification</label>
-        <UiDropdown class="selection"  @onChange={{action "loadDemo"}}>
+        <UiDropdown class="selection" @onChange={{action "loadDemo"}}>
           <input type="hidden" name="gender">
           <i class="dropdown icon"></i>
           <div class="default text">Demo</div>
           <div class="menu">
             <div class="item" data-value="tritone">COINVENT tritone example</div>
             <div class="item" data-value="houseBoatMinimal">house-boat minimal example</div>
+            <div class="item" data-value="houseBoatMedium">house-boat medium example</div>
+            <div class="item" data-value="houseBoat">house-boat example (this can take a few hours)</div>
           </div>
         </UiDropdown>
       </div>
@@ -36,22 +38,23 @@
         <Input @value={{this.spaceName2}} placeholder="Input Space Name 2..."/>
       </div>
     </div>
-    <button class="ui button {{if this.paramsAreInvalid "disabled"}}" type="submit">Run Amalgamation</button>
+    {{#if this.isError}}
+      <div class="ui error message">
+        <div class="ui header">An error occurred</div>
+        <p>{{this.model}}</p>
+      </div>
+    {{/if}}
+    <button class="ui huge button {{if this.paramsAreInvalid "disabled"}}" type="submit">Run Amalgamation</button>
   </form>
-</div>
 
-{{#if this.isError}}
-  <div class="ui error message">
-    <div class="ui header">An error occurred</div>
-    {{this.model}}
-  </div>
-{{/if}}
+  {{#if this.currentlyLoading}}
+    <div class="ui active inverted dimmer">
+      <div class="ui huge text loader">Generalize and blend input spaces...</div>
+    </div>
+  {{/if}}
 
-{{#if this.isSuccess}}
-
-  <div class="ui divider"></div>
-
-  <div class="ui segment">
+  {{#if this.isSuccess}}
+    <div class="ui divider"></div>
     <table class="ui celled table">
       <tbody>
         <tr>
@@ -68,35 +71,29 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
-  <div class="ui divider"></div>
+    <div class="ui divider"></div>
 
-  <UiTabs class="ui segment">
-    <div class="ui top attached tabular menu">
-      <div class="item" data-tab="generic">generic space</div>
-      <div class="item active" data-tab="blend">blend</div>
-      <div class="item" data-tab="input1">input space 1</div>
-      <div class="item" data-tab="input2">input space 2</div>
-    </div>
-    <div class="ui tab" data-tab="generic">
-      <p>{{specs.genericSpace}}</p>
-    </div>
-    <div class="ui tab active" data-tab="blend">
-      <p>{{specs.blend}}</p>
-    </div>
-    <div class="ui tab" data-tab="input1">
-      <p>{{specs.input1}}</p>
-    </div>
-    <div class="ui tab" data-tab="input2">
-      <p>{{specs.input2}}</p>
-    </div>
-  </UiTabs>
+    <UiTabs class="ui segment">
+      <div class="ui top attached tabular menu">
+        <a class="item" data-tab="generic">generic space</a>
+        <a class="item active" data-tab="blend">blend</a>
+        <a class="item" data-tab="input1">input space 1</a>
+        <a class="item" data-tab="input2">input space 2</a>
+      </div>
+      <div class="ui tab" data-tab="generic">
+        <p>{{specs.genericSpace}}</p>
+      </div>
+      <div class="ui tab active" data-tab="blend">
+        <p>{{specs.blend}}</p>
+      </div>
+      <div class="ui tab" data-tab="input1">
+        <p>{{specs.input1}}</p>
+      </div>
+      <div class="ui tab" data-tab="input2">
+        <p>{{specs.input2}}</p>
+      </div>
+    </UiTabs>
 
-{{/if}}
-
-{{#if this.currentlyLoading}}
-  <div class="ui active inverted dimmer">
-    <div class="ui text loader">Generalize and blend input spaces...</div>
-  </div>
-{{/if}}
+  {{/if}}
+</div>

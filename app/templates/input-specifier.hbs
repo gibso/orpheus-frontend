@@ -1,34 +1,37 @@
-<div class="ui segment">
-  <form class="ui form" {{action "refreshModel" on="submit"}}>
-    <div class="field">
-      <label>Input Concept 1</label>
-      <Input @value={{this.concept1}} @enter={{action "refreshModel"}} placeholder="Input Concept 1..."/>
+<div class="ui container padded segment">
+  <form class="ui huge form" {{action "refreshModel" on="submit"}}>
+    <div class="two fields">
+      <div class="field">
+        <label>Input Concept 1</label>
+        <Input @value={{this.concept1}} @enter={{action "refreshModel"}} placeholder="house"/>
+      </div>
+      <div class="field">
+        <label>Input Concept 2</label>
+        <Input @value={{this.concept2}} @enter={{action "refreshModel"}} placeholder="boat"/>
+      </div>
     </div>
-    <div class="field">
-      <label>Input Concept 2</label>
-      <Input @value={{this.concept2}} @enter={{action "refreshModel"}} placeholder="Input Concept 2..."/>
-    </div>
-    <button class="ui button {{unless this.paramsAreValid "disabled"}}" type="submit">Specify</button>
+    {{#if this.error}}
+      <div class="ui error message">
+        <div class="ui header">An error occurred</div>
+        {{this.error}}
+      </div>
+    {{/if}}
+    <button class="ui huge button {{unless this.paramsAreValid "disabled"}}" type="submit">Specify</button>
   </form>
+
+  {{#if this.isSuccess}}
+    <div class="ui divider"></div>
+    <a class="ui top attached button" href={{this.downloadUrl}} download="{{this.concept1}}-{{this.concept2}}.casl">
+      Save CASL
+    </a>
+    <div class="ui attached segment">
+      <p>{{this.spec}}</p>
+    </div>
+  {{/if}}
+
+  {{#if this.currentlyLoading}}
+    <div class="ui active inverted dimmer">
+      <div class="ui huge text loader">Extract and specify mental spaces...</div>
+    </div>
+  {{/if}}
 </div>
-
-{{#if this.model}}
-  <div class="ui divider"></div>
-  <a class="ui top attached button" href={{this.downloadUrl}} download="{{this.concept1}}-{{this.concept2}}.casl">Save CASL</a>
-  <div class="ui attached segment">
-    <p>{{this.spec}}</p>
-  </div>
-{{/if}}
-
-{{#if this.error}}
-  <div class="ui error message">
-    <div class="ui header">An error occurred</div>
-    {{this.error}}
-  </div>
-{{/if}}
-
-{{#if this.currentlyLoading}}
-  <div class="ui active inverted dimmer">
-    <div class="ui text loader">Extract and specify mental spaces...</div>
-  </div>
-{{/if}}

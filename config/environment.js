@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'myapp',
+    modulePrefix: 'orpheus',
     environment,
     rootURL: '/',
     locationType: 'auto',

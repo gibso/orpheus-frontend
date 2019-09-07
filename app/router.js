@@ -7,7 +7,7 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('thesis');
+  this.route('thesis', { path: '/' });
   this.route('concept-specifier');
   this.route('input-specifier');
   this.route('amalgamation');

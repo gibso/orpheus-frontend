@@ -12,7 +12,8 @@ export default Controller.extend({
   isError: null,
 
   notError: not('isError'),
-  isSuccess: and('notError', 'model'),
+  notLoading: not('currentlyLoading'),
+  isSuccess: and('notError', 'model', 'notLoading'),
   paramsAreInvalid: not('paramsAreValid'),
 
   paramsAreValid: computed('specFile', 'spaceName1', 'spaceName2', function(){
@@ -46,6 +47,10 @@ export default Controller.extend({
           return this.loadDemo('tritone_demo.casl', 'G7', 'Bbmin');
         case 'houseBoatMinimal':
           return this.loadDemo('house_boat_minimal.casl', 'House', 'Boat');
+        case 'houseBoatMedium':
+          return this.loadDemo('house-boat_medium.casl', 'House', 'Boat');
+        case 'houseBoat':
+          return this.loadDemo('house-boat.casl', 'House', 'Boat');
       }
     },
   },
