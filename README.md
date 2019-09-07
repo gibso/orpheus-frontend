@@ -13,7 +13,7 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone git@github.com:gibso/orpheus-frontend.git` this repository
 * `cd orpheus`
 * `npm install`
 
