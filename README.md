@@ -1,4 +1,4 @@
-# ORPHEUS FRONTEND
+# ORPHEUS FRONTEND [![Build Status](https://travis-ci.com/gibso/orpheus-frontend.svg?branch=master)](https://travis-ci.com/gibso/orpheus-frontend)
 
 This is the frontend for the [orpheus project](https://github.com/gibso/orpheus-dev), which is part of my masterthesis.
 
