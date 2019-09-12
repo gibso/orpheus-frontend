@@ -1,21 +1,13 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
-import { not, and } from '@ember/object/computed';
+import { not } from '@ember/object/computed';
 import { getOwner } from '@ember/application';
-import { formatSpec2Html } from './utils/spec-formatter'
+import LoadableMixin from './mixins/loadable';
 
-export default Controller.extend({
+export default Controller.extend(LoadableMixin, {
 
-  specFile: null,
-  spaceName1: null,
-  spaceName2: null,
-  isError: null,
 
-  notError: not('isError'),
-  notLoading: not('currentlyLoading'),
-  isSuccess: and('notError', 'model', 'notLoading'),
   paramsAreInvalid: not('paramsAreValid'),
-
   paramsAreValid: computed('specFile', 'spaceName1', 'spaceName2', function(){
     return !!this.specFile && !!this.spaceName1 && !!this.spaceName2;
   }),

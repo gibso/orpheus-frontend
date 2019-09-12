@@ -4,14 +4,15 @@
       <label>Input Concept</label>
       <Input @value={{this.concept}} @enter={{action "refreshModel"}} placeholder="Concept..."/>
     </div>
-    {{#if this.error}}
-      <div class="ui error message">
-        <div class="ui header">An error occurred</div>
-        {{this.error}}
-      </div>
-    {{/if}}
     <button class="ui huge button {{unless this.paramsAreValid "disabled"}}" type="submit">Specify</button>
   </form>
+
+  {{#if this.error}}
+    <div class="ui error message">
+      <div class="ui header">An error occurred</div>
+      {{this.error}}
+    </div>
+  {{/if}}
 
   {{#if this.isSuccess}}
     <div class="ui divider"></div>

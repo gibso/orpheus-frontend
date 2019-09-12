@@ -8,11 +8,15 @@ export default Route.extend(LoadableMixin, ResetableMixin, {
 
   amalgamationEndpoint: 'http://' + ENV.APP.amalgamationHost + '/amalgamation',
 
+  actions: {
+
+  },
+
   model() {
     if (!this.controller || this.controller.paramsAreInvalid) {
       return null;
     }
-    this.controller.set('isError', null);
+    this.controller.set('error', null);
 
     const { specFile, spaceName1, spaceName2 } = this.controller;
     const formData = new FormData();
@@ -22,17 +26,9 @@ export default Route.extend(LoadableMixin, ResetableMixin, {
       method: 'POST',
       body: formData
     })
-      .catch(error => {
-        this.controller.set('isError', true);
-        return error.toString();
-      })
       .then(response => {
-        if (this.controller.isError) {
-          return response;
-        }
         if (response.status !== 200) {
-          this.controller.set('isError', true);
-          return response.text();
+          throw Error(response.status);
         }
 
         return response.json().then(blendListData => {

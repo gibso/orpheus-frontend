@@ -1,5 +1,5 @@
 import EmberObject from '@ember/object';
-import {formatSpec2Html} from "../controllers/utils/spec-formatter";
+import { formatSpec2Html } from "../utils/spec-formatter";
 import { computed } from '@ember/object';
 
 export default EmberObject.extend({

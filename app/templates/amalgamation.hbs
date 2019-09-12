@@ -37,14 +37,15 @@
         <Input @value={{this.spaceName2}} placeholder="Input Space Name 2..."/>
       </div>
     </div>
-    {{#if this.isError}}
-      <div class="ui error message">
-        <div class="ui header">An error occurred</div>
-        <p>{{this.model}}</p>
-      </div>
-    {{/if}}
     <button class="ui huge button {{if this.paramsAreInvalid "disabled"}}" type="submit">Run Amalgamation</button>
   </form>
+
+  {{#if this.error}}
+    <div class="ui error message">
+      <div class="ui header">An error occurred</div>
+      <p>{{this.error}}</p>
+    </div>
+  {{/if}}
 
   {{#if this.currentlyLoading}}
     <div class="ui active inverted dimmer">

@@ -1,18 +1,14 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
-import { formatSpec2Html } from './utils/spec-formatter'
-import { not, and } from '@ember/object/computed';
+import { formatSpec2Html } from '../utils/spec-formatter'
+import { not } from '@ember/object/computed';
+import LoadableMixin from './mixins/loadable';
 
-export default Controller.extend({
+export default Controller.extend(LoadableMixin, {
 
-  concept: null,
 
   paramsAreInvalid: not('paramsAreValid'),
-  notError: not('error'),
-  notLoading: not('currentlyLoading'),
-  isSuccess: and('notError', 'model', 'notLoading'),
-
   paramsAreValid: computed('concept', function () {
     return !!this.concept;
   }),

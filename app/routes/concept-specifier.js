@@ -22,8 +22,7 @@ export default Route.extend(LoadableMixin, ResetableMixin, {
     if (!this.controller || this.controller.paramsAreInvalid) {
       return null;
     }
-
-    this.controller.set('isError', false);
+    this.controller.set('error', null);
 
     return this.request().then(response =>
       response.clone().blob().then(blob =>
@@ -31,9 +30,6 @@ export default Route.extend(LoadableMixin, ResetableMixin, {
           return {spec, blob}
         })
       )
-    ).catch(error => {
-      this.controller.set('error', error);
-      throw error;
-    });
+    );
   }
 });
