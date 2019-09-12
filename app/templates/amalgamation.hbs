@@ -9,9 +9,8 @@
           <div class="default text">Demo</div>
           <div class="menu">
             <div class="item" data-value="tritone">COINVENT tritone example</div>
-            <div class="item" data-value="houseBoatMinimal">house-boat minimal example</div>
-            <div class="item" data-value="houseBoatMedium">house-boat medium example (this takes ~1 hour)</div>
-            <div class="item" data-value="houseBoat">house-boat example (this can take many hours)</div>
+            <div class="item" data-value="houseBoatEppe">house-boat Eppe example</div>
+            <div class="item" data-value="houseBoatConceptNet">house-boat ConceptNet example</div>
           </div>
         </UiDropdown>
       </div>
@@ -55,45 +54,26 @@
 
   {{#if this.isSuccess}}
     <div class="ui divider"></div>
-    <table class="ui celled table">
-      <tbody>
-        <tr>
-          <td>Blend ID</td>
-          <td>{{model.blendId}}</td>
-        </tr>
-        <tr>
-          <td>Blend name</td>
-          <td>{{model.blendName}}</td>
-        </tr>
-        <tr>
-          <td>Cost</td>
-          <td>{{model.cost}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="ui center aligned basic segment">
+      <h3 class="center">Created {{model.length}} Blends!</h3>
+    </div>
+    <div class="ui form">
+      <div class="field">
+        <label>Blend</label>
+        <UiDropdown class="ui fluid selection" @onChange={{action (mut currentBlendId)}}>
+          <i class="dropdown icon"></i>
+          <div class="default text">Select Blend</div>
+          <div class="menu">
+            {{#each model as |blend|}}
+              <div class="item" data-value={{blend.blendId}}>{{blend.blendName}}</div>
+            {{/each}}
+          </div>
+        </UiDropdown>
+      </div>
+    </div>
 
-    <div class="ui divider"></div>
-
-    <UiTabs class="ui segment">
-      <div class="ui top attached tabular menu">
-        <a class="item" data-tab="generic">generic space</a>
-        <a class="item active" data-tab="blend">blend</a>
-        <a class="item" data-tab="input1">input space 1</a>
-        <a class="item" data-tab="input2">input space 2</a>
-      </div>
-      <div class="ui tab" data-tab="generic">
-        <p>{{specs.genericSpace}}</p>
-      </div>
-      <div class="ui tab active" data-tab="blend">
-        <p>{{specs.blend}}</p>
-      </div>
-      <div class="ui tab" data-tab="input1">
-        <p>{{specs.input1}}</p>
-      </div>
-      <div class="ui tab" data-tab="input2">
-        <p>{{specs.input2}}</p>
-      </div>
-    </UiTabs>
-
+    {{#if currentBlend}}
+      <Blend @blend={{currentBlend}}></Blend>
+    {{/if}}
   {{/if}}
 </div>

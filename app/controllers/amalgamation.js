@@ -20,16 +20,8 @@ export default Controller.extend({
     return !!this.specFile && !!this.spaceName1 && !!this.spaceName2;
   }),
 
-  specs: computed('model', function () {
-    if (!this.isSuccess){
-      return;
-    }
-    let { genericSpace, blend, input1, input2 } = this.model;
-    const specs = { genericSpace, blend, input1, input2 };
-    Object.keys(specs).forEach(specKey =>
-      specs[specKey] = formatSpec2Html(specs[specKey])
-    );
-    return specs
+  currentBlend: computed('currentBlendId', function(){
+    return this.model.find(blend => blend.blendId === this.currentBlendId);
   }),
 
   actions: {
@@ -45,12 +37,10 @@ export default Controller.extend({
       switch(demo) {
         case 'tritone':
           return this.loadDemo('tritone_demo.casl', 'G7', 'Bbmin');
-        case 'houseBoatMinimal':
-          return this.loadDemo('house_boat_minimal.casl', 'House', 'Boat');
-        case 'houseBoatMedium':
-          return this.loadDemo('house-boat_medium.casl', 'House', 'Boat');
-        case 'houseBoat':
-          return this.loadDemo('house-boat.casl', 'House', 'Boat');
+        case 'houseBoatConceptNet':
+          return this.loadDemo('house_boat_conceptnet.casl', 'House', 'Boat');
+        case 'houseBoatEppe':
+          return this.loadDemo('house_boat_eppe.casl', 'House', 'Boat');
       }
     },
   },

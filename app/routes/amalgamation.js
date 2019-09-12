@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import ENV from '../config/environment';
 import LoadableMixin from './mixins/loadable';
 import ResetableMixin from './mixins/resetable';
+import Blend from '../models/blend'
 
 export default Route.extend(LoadableMixin, ResetableMixin, {
 
@@ -33,7 +34,10 @@ export default Route.extend(LoadableMixin, ResetableMixin, {
           this.controller.set('isError', true);
           return response.text();
         }
-        return response.json();
+
+        return response.json().then(blendListData => {
+          return blendListData.map(blendData => Blend.create(blendData));
+        });
       })
   }
 });

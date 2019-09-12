@@ -1,0 +1,88 @@
+spec Global =
+    sorts
+        Concept < Object
+end
+
+spec House = Global then
+    ops
+        shelter : Concept
+        house : Concept
+        street : Concept
+        burn_down : Concept
+        susceptible_to_fire : Concept
+        surface_of_earth : Concept
+        home : Concept
+        theater : Concept
+        place_and_thing : Concept
+        accommodate : Concept
+        building : Concept
+        music_genre : Concept
+        apartment : Concept
+        rooms : Concept
+    preds
+        RelatedTo : Concept * Concept
+        IsA : Concept * Concept
+        PartOf : Concept * Concept
+        HasA : Concept * Concept
+        UsedFor : Concept * Concept
+        CapableOf : Concept * Concept
+        AtLocation : Concept * Concept
+        HasProperty : Concept * Concept
+        Synonym : Concept * Concept
+        Antonym : Concept * Concept
+        DistinctFrom : Concept * Concept
+        MannerOf : Concept * Concept
+        HasContext : Concept * Concept
+        SimilarTo : Concept * Concept
+    . RelatedTo(house,building)  %(Ax-RelatedTo0:p:6)%
+    . IsA(house,place_and_thing)  %(Ax-IsA1:p:3)%
+    . PartOf(house,street)  %(Ax-PartOf2:p:1)%
+    . HasA(house,rooms)  %(Ax-HasA3:p:4)%
+    . UsedFor(house,shelter)  %(Ax-UsedFor4:p:3)%
+    . CapableOf(house,burn_down)  %(Ax-CapableOf5:p:2)%
+    . AtLocation(house,surface_of_earth)  %(Ax-AtLocation6:p:2)%
+    . HasProperty(house,susceptible_to_fire)  %(Ax-HasProperty7:p:1)%
+    . Synonym(house,theater)  %(Ax-Synonym8:p:2)%
+    . Antonym(house,apartment)  %(Ax-Antonym9:p:0)%
+    . DistinctFrom(house,apartment)  %(Ax-DistinctFrom10:p:0)%
+    . MannerOf(house,accommodate)  %(Ax-MannerOf11:p:2)%
+    . HasContext(house,music_genre)  %(Ax-HasContext12:p:1)%
+    . SimilarTo(house,home)  %(Ax-SimilarTo13:p:1)%
+end
+
+spec Boat = Global then
+    ops
+        travel_on_water : Concept
+        powered_by_engine : Concept
+        form_of_transportation : Concept
+        car : Concept
+        ride : Concept
+        navigation : Concept
+        ship_cargo : Concept
+        boat : Concept
+        sails : Concept
+        water : Concept
+    preds
+        RelatedTo : Concept * Concept
+        IsA : Concept * Concept
+        HasA : Concept * Concept
+        UsedFor : Concept * Concept
+        CapableOf : Concept * Concept
+        AtLocation : Concept * Concept
+        HasProperty : Concept * Concept
+        Antonym : Concept * Concept
+        DistinctFrom : Concept * Concept
+        MannerOf : Concept * Concept
+        HasContext : Concept * Concept
+    . RelatedTo(boat,water)  %(Ax-RelatedTo0:p:7)%
+    . IsA(boat,form_of_transportation)  %(Ax-IsA1:p:4)%
+    . HasA(boat,sails)  %(Ax-HasA2:p:2)%
+    . UsedFor(boat,travel_on_water)  %(Ax-UsedFor3:p:7)%
+    . CapableOf(boat,ship_cargo)  %(Ax-CapableOf4:p:3)%
+    . AtLocation(boat,water)  %(Ax-AtLocation5:p:8)%
+    . HasProperty(boat,powered_by_engine)  %(Ax-HasProperty6:p:1)%
+    . Antonym(boat,car)  %(Ax-Antonym7:p:0)%
+    . DistinctFrom(boat,car)  %(Ax-DistinctFrom8:p:0)%
+    . MannerOf(boat,ride)  %(Ax-MannerOf9:p:2)%
+    . HasContext(boat,navigation)  %(Ax-HasContext10:p:2)%
+end
