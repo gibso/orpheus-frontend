@@ -1,6 +1,38 @@
 spec Global =
-    sorts
-        Concept < Object
+    generated type Concept ::= travel_on_water | form_of_transportation | ride | ship_cargo | theater | accommodate | car | street | burn_down | boat | surface_of_earth | music_genre | water | shelter | navigation | susceptible_to_fire | home | building | rooms | place_and_thing | powered_by_engine | house | sails | apartment
+    preds
+        RelatedTo : Concept * Concept
+        FormOf : Concept * Concept
+        IsA : Concept * Concept
+        PartOf : Concept * Concept
+        HasA : Concept * Concept
+        UsedFor : Concept * Concept
+        CapableOf : Concept * Concept
+        AtLocation : Concept * Concept
+        Causes : Concept * Concept
+        HasSubevent : Concept * Concept
+        HasFirstSubevent : Concept * Concept
+        HasLastSubevent : Concept * Concept
+        HasPrerequisite : Concept * Concept
+        HasProperty : Concept * Concept
+        MotivatedByGoal : Concept * Concept
+        ObstructedBy : Concept * Concept
+        Desires : Concept * Concept
+        CreatedBy : Concept * Concept
+        Synonym : Concept * Concept
+        Antonym : Concept * Concept
+        DistinctFrom : Concept * Concept
+        DerivedFrom : Concept * Concept
+        SymbolOf : Concept * Concept
+        DefinedAs : Concept * Concept
+        MannerOf : Concept * Concept
+        LocatedNear : Concept * Concept
+        HasContext : Concept * Concept
+        SimilarTo : Concept * Concept
+        EtymologicallyRelatedTo : Concept * Concept
+        EtymologicallyDerivedFrom : Concept * Concept
+        CausesDesire : Concept * Concept
+        MadeOfReceivesAction : Concept * Concept
 end
 
 spec House = Global then
@@ -19,21 +51,6 @@ spec House = Global then
         music_genre : Concept
         apartment : Concept
         rooms : Concept
-    preds
-        RelatedTo : Concept * Concept
-        IsA : Concept * Concept
-        PartOf : Concept * Concept
-        HasA : Concept * Concept
-        UsedFor : Concept * Concept
-        CapableOf : Concept * Concept
-        AtLocation : Concept * Concept
-        HasProperty : Concept * Concept
-        Synonym : Concept * Concept
-        Antonym : Concept * Concept
-        DistinctFrom : Concept * Concept
-        MannerOf : Concept * Concept
-        HasContext : Concept * Concept
-        SimilarTo : Concept * Concept
     . RelatedTo(house,building)  %(Ax-RelatedTo0:p:6)%
     . IsA(house,place_and_thing)  %(Ax-IsA1:p:3)%
     . PartOf(house,street)  %(Ax-PartOf2:p:1)%
@@ -62,18 +79,6 @@ spec Boat = Global then
         boat : Concept
         sails : Concept
         water : Concept
-    preds
-        RelatedTo : Concept * Concept
-        IsA : Concept * Concept
-        HasA : Concept * Concept
-        UsedFor : Concept * Concept
-        CapableOf : Concept * Concept
-        AtLocation : Concept * Concept
-        HasProperty : Concept * Concept
-        Antonym : Concept * Concept
-        DistinctFrom : Concept * Concept
-        MannerOf : Concept * Concept
-        HasContext : Concept * Concept
     . RelatedTo(boat,water)  %(Ax-RelatedTo0:p:7)%
     . IsA(boat,form_of_transportation)  %(Ax-IsA1:p:4)%
     . HasA(boat,sails)  %(Ax-HasA2:p:2)%

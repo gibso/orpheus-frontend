@@ -2,21 +2,6 @@ spec Global =
     generated type Medium ::= water | land
 end
 
-spec House = Global then
-    sorts
-        Medium
-        House < Object
-        Person < Object
-    ops house : House
-        resident : Person
-        land : Medium
-    preds
-        liveIn : Person * House
-        on : Object * Medium
-    . liveIn(resident,house)
-    . on(house,land)
-end
-
 spec Boat = Global then
     sorts
         Medium
@@ -30,4 +15,20 @@ spec Boat = Global then
         on : Object * Medium
     . ride(passenger,boat)
     . on(boat,water)
+end
+
+
+spec House = Global then
+    sorts
+        Medium
+        House < Object
+        Person < Object
+    ops house : House
+        resident : Person
+        land : Medium
+    preds
+        liveIn : Person * House
+        on : Object * Medium
+    . liveIn(resident,house)
+    . on(house,land)
 end
